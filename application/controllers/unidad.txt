@@ -1,0 +1,60 @@
+public function enquiry_list($orderstatus = NULL,$fitmentagentstatus = NULL){  
+		if($this->session->userdata('usertype') != "cs"  &&  $this->session->userdata('usertype') != "superadmin" && $this->session->userdata('usertype') != "sa" ){ redirect('home'); }
+		$data['title'] = "UNIDAD | Enquiry List ";
+		$data['activemenu']="enquiry"; 
+		$data['activemenusub']="2"; 
+		$data['successmessage'] = "";
+		$data['errormessage'] = "";
+		$data['custrows']="" ; 
+		$data['executedquery']="nnn";
+		$data['statuslist']=$this->enquiry_pro->get_all_status_array();
+		$data['sa_fa_list'] = $data['sa_list'] =  $this->enquiry_pro->list( "users", array('type'=>'sa') );
+		$data['fa_list'] =  $this->enquiry_pro->list( "users", array('type'=>'fa') );
+		$data['sa_fa_list'] = array_merge($data['sa_fa_list'],$data['fa_list'] );
+		$data['admin_list'] =   $this->enquiry_pro->list(  "users", array( "type"=>"superadmin" ) ) ;
+ 		$data['canenterbylist'] = array_merge( $data['admin_list'] , $data['sa_list'] ) ;
+			$searchdata =array(
+					'res_enquiry_master.status' => ($this->input->post('status') ) ? $this->input->post('status') : null,
+					'fa_approval' => ($this->input->post('fit_status')) ? $this->input->post('fit_status') : null,
+					'fa_id' => ($this->input->post('fit_agent')) ? $this->input->post('fit_agent') : null,
+			);
+			if($this->session->userdata('usertype') == "superadmin")
+			{
+				 $searchdata['entered_by']   =  ($this->input->post('addedby')) ? $this->input->post('addedby') : null ;
+			}else{
+				 $searchdata['entered_by'] = $this->session->userdata('userid');
+				 $searchdata[ ' res_enquiry_master.status != '] = "DELIVERED";
+			}
+			$searchdata = array_filter($searchdata);
+ 		$this->db->select('*,tbl_vehicle.id as vehcleid, res_customer.id as custUID, vehicle_type.type as vtype, res_enquiry_master.status as enstatus , count(tbl_vehicle.id) as vehcount, res_enquiry_master.id as morderid ');
+		$this->db->from('tbl_vehicle');
+		$this->db->join('res_enquiry_master', 'tbl_vehicle.order_id = res_enquiry_master.id');
+		$this->db->join('res_customer', 'res_enquiry_master.customerid = res_customer.id');
+		$this->db->join('vehicle_type', 'tbl_vehicle.vehicle_type = vehicle_type.id');
+		$this->db->join('seating', 'tbl_vehicle.seating = seating.id');
+		$this->db->join('subscription', 'tbl_vehicle.subscription = subscription.id');
+		$this->db->join('rto', 'tbl_vehicle.rto = rto.id');
+		$this->db->group_by('fileno');
+		if( $this->input->post('key_name') )
+		{
+			$this->db->like('fileno',$this->input->post('key_name'));
+		}
+  
+		if(!empty($searchdata ))
+		{
+				$this->db->where($searchdata);
+		}
+		$data['custrows'] = $this->db->get()->result_array();
+		 //   echo $this->db->last_query();  exit;
+		 // / echo "<pre>"; print_r($data['custrows']); exit;
+		$data['vehiclestatus'] = $this->enquiry_pro->list("status");
+		$data['users'] = $this->enquiry_pro->list("users");
+		$data["no_need_excel"] = 1;
+ 		$this->load->view('templates/header',$data);
+		//load listin view with options/filters  for admin users
+		//for admin users
+		$this->load->view('pro/pages/list_enquiries_withfilter_new',$data);
+		//for limited users
+		//$this->load->view('pro/pages/list_enquiries',$data);
+		$this->load->view('templates/footer',$data);
+	}

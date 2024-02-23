@@ -1,0 +1,74 @@
+this query works, but this is not the format i want. i will explain. this is the table which i want to show the data. <table class="table table-flush" id="customer-item-list">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">sl/no</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">Customer</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">ob</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 1</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 2</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 3</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 4</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 5</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 6</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 7</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 8</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 9</th>
+                                    <th class="  text-uppercase text-secondary text-xs font-weight-bolder ">item 10</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">1</p>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-0 text-md">Customer 1</h6>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-0 text-md">ob</h6>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-sm font-weight-bold mb-0">100</p>
+                                        <p class="text-xs text-secondary mb-0">unit</p>
+                                    </td>
+                                </tr>
+                               
+
+                            </tbody>. you see in thead, i need to loop through all items and display them,instead of item1 item2 etc.then in the body part, i want to display the customer name and his order counts for respective items, for example consider milk,bag,rice are the items, which displayed in the table header.if milk is the first item then i want a particular customers milk count,next is bag i want bag count so and so for each items for that customer. like this i want to display all customer orders in that table
